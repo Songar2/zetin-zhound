@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Z-HOUND 완성품 검수 사전자료</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400..900&display=swap">
+<style>
+html,body{margin:0;background:#0e0f12;font-family:'Noto Sans KR',Arial,sans-serif}
+#deck{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0 48px}
+.frame{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.slide{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;box-sizing:border-box;display:flex;flex-direction:column;color:#15171B;font-family:'Noto Sans KR',Arial,sans-serif}
+.slide *{box-sizing:border-box;margin:0}
+.slide div{display:flex;flex-direction:column}
+.slide h1{font-size:96px;font-weight:600;line-height:1.1}
+.slide h2{font-size:64px;font-weight:600;line-height:1.15}
+.slide h3{font-size:44px;font-weight:600;line-height:1.2}
+.slide p{font-size:32px;line-height:1.4}
+.slide ul,.slide ol{padding-left:1.3em}
+.slide table{border-collapse:collapse;width:100%}
+.slide th,.slide td{padding:.35em .6em;border-bottom:1px solid rgba(128,128,128,.35);text-align:left;vertical-align:top}
+.slide th{font-weight:700;border-bottom:2px solid rgba(128,128,128,.6)}
+.slide video{display:block}
+body.present{overflow:hidden;background:#000}
+body.present #deck{padding:0;gap:0}
+body.present .frame{display:none;box-shadow:none}
+body.present .frame.on{display:block}
+#hint{position:fixed;right:16px;bottom:12px;color:#9aa0a6;font-size:13px;font-family:Arial,sans-serif}
+body.present #hint{display:none}
+</style></head><body>
+<div id="deck"><section class="slide" id="cover" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:200px 128px 112px 128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="position:absolute;left:0px;top:0px;width:1920px;height:120px;background:#15171B"></div>
+<p style="position:absolute;left:128px;top:34px;width:700px;font-size:40px;font-weight:800;color:#F3F3EE;letter-spacing:2px">∞ <span style="color:#C5DF3A">ZETIN</span> · ZEro To INfinite</p>
+<p style="position:absolute;right:128px;top:42px;width:760px;font-size:28px;font-weight:600;color:#F3F3EE;text-align:right">완성품 검수 사전자료</p>
+<img src="assets/zhound_render.jpg" alt="Z-HOUND 3D 렌더링: Jetson Orin Nano, 고관절 액추에이터 AK70-10·AK10-9, 무릎 액추에이터 AK10-9, 풋패드 표시" style="position:absolute;left:820px;top:210px;width:1040px;height:613px;object-fit:contain">
+<div style="display:flex;flex-direction:column;gap:20px;width:700px">
+<p style="font-size:26px;font-weight:700;letter-spacing:4px;color:#4F6800">— AI QUADRUPED ROBOT</p>
+<h1 style="font-size:150px;font-weight:900;line-height:1;letter-spacing:-6px">Z<span style="color:#A9C21E">-</span>HOUND</h1>
+<p style="font-size:26px;color:#4A4F57"><b>Z</b>ETIN <b>H</b>igh-performance <b>O</b>ptimized <b>U</b>nified <b>N</b>avigating <b>D</b>og</p>
+<p style="font-size:40px;font-weight:700;line-height:1.3;padding:16px 0px 0px 0px">강화학습으로 걷는<br>12자유도 4족보행 로봇 안내견</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;gap:16px">
+<p style="font-size:26px;font-weight:600;background:#FBFBF8;border:2px solid #D3D5CC;border-radius:40px;padding:8px 24px">12 DoF</p>
+<p style="font-size:26px;font-weight:600;background:#FBFBF8;border:2px solid #D3D5CC;border-radius:40px;padding:8px 24px">23 kg</p>
+<p style="font-size:26px;font-weight:600;background:#FBFBF8;border:2px solid #D3D5CC;border-radius:40px;padding:8px 24px">AK 모터 × 12</p>
+<p style="font-size:26px;font-weight:600;background:#FBFBF8;border:2px solid #D3D5CC;border-radius:40px;padding:8px 24px">Jetson Orin Nano</p>
+<p style="font-size:26px;font-weight:600;background:#FBFBF8;border:2px solid #D3D5CC;border-radius:40px;padding:8px 24px">Isaac Sim · ROS2</p>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="team" style="display:flex; flex-direction:column; gap:48px; padding:128px 128px 160px; background:#f3f3ee">
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:3px; color:#4f6800">01 · 소개</p>
+    <h2 style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.15; color:#15171b">ZEro To INfinite와 <span style="color:#4f6800">Z-HOUND</span></h2>
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; color:#6a6f76">“ 로봇연구회에서 출발한 팀의 4족보행 로봇 개발 ”</p>
+  </div>
+  <div style="display:flex; flex-direction:row; gap:64px; flex:1">
+    <div style="display:flex; flex-direction:column; gap:24px; flex:1">
+      <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:32px; line-height:1.5; color:#3a3f47">서울시립대 중앙 로봇연구회 ZETIN(1993년 창설)에서 출발, 2026년 6월 설립.</p>
+      <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:32px; line-height:1.5; color:#3a3f47">캠퍼스타운 SI-STATION#1 입주 기업.&nbsp;<br>RoboCup Korea Open 2026 휴머노이드 성인부 우승.</p>
+      <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:32px; line-height:1.5; color:#3a3f47">설계·보행 AI 학습·로봇 SW까지 <b>외주 없이 자체 개발</b>.</p>
+    </div>
+    <table style="flex:1; font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; color:#15171b">
+      <tr><th style="width:30%">항목</th><th style="width:70%">사양</th></tr>
+      <tr><td>구조</td><td>4족 · 12자유도 (다리당 3관절)</td></tr>
+      <tr><td>구동기</td><td>AK70-10 × 4, AK10-9 × 8</td></tr>
+      <tr><td>연산</td><td>Jetson Orin Nano Super</td></tr>
+      <tr><td>모터 제어</td><td>STM32G474 → CAN</td></tr>
+      <tr><td>센서</td><td>깊이 카메라, IMU, 관절 엔코더</td></tr>
+      <tr><td>전원</td><td>6S 16,000 mAh × 2 직렬 (12S)</td></tr>
+      <tr><td>몸체</td><td>306 × 520 × 150 mm, 3D 프린팅</td></tr>
+      <tr><td>질량</td><td>약 23 kg (CAD 기준)</td></tr>
+    </table>
+  </div>
+  <p style="position:absolute; right:128px; bottom:64px; width:100px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; text-align:right; color:#7a7f86">2</p>
+</section>
+
+<section class="slide" id="purpose" style="background:#f3f3ee">
+  <p id="e1-1xnvfgh" style="position:absolute; right:128px; bottom:64px; width:100px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; text-align:right; color:#7a7f86">3</p>
+  <div id="pafd51f2ababdr0-6a06600a" style="position:absolute; top:128px; left:128px; width:1664px; height:179px; display:flex; flex-direction:column; gap:16px">
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; font-weight:700; letter-spacing:3px; color:#4f6800">02 · 소개</p>
+    <h2 style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:64px; font-weight:700; line-height:1.15; color:#15171b">로봇 안내견의 <span style="color:#4f6800">필요성</span></h2>
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; color:#6a6f76">“ 시각장애인 이동 보조의 공백과 이번 사업의 범위 ”</p>
+  </div>
+  <div id="pf2c206cf9becc0-d2e6d276" style="position:absolute; top:354px; left:128px; width:534px; height:566px; display:flex; flex-direction:column; gap:20px; padding:48px; background:#fbfbf8; border:1px solid #dcddd5; border-radius:16px">
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; font-weight:700; color:#4f6800">문제</p>
+    <h3 style="width:419px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.3; color:#15171b">안내견은 부족,&nbsp;<br>흰지팡이는 닿는 곳만</h3>
+  </div>
+  <div id="pf2c206cf9becc1-d2e6d276" style="position:absolute; top:354px; left:694px; width:534px; height:566px; display:flex; flex-direction:column; gap:20px; padding:48px; background:#fbfbf8; border:1px solid #dcddd5; border-radius:16px">
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; font-weight:700; color:#4f6800">접근</p>
+    <h3 style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.3; color:#15171b">다리로 걷는 로봇이 보고 안내</h3>
+    <p style="width:464px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; line-height:1.5; color:#4a4f57">깊이 카메라로 전방 지형 인식, 계단·턱 통과. 방향·정지·경고는 손잡이로 전달.</p>
+  </div>
+  <div id="pf2c206cf9becc2-d2e6d276" style="position:absolute; top:354px; left:1259px; width:533px; height:566px; display:flex; flex-direction:column; gap:20px; padding:48px; background:#15171b; border-radius:16px">
+    <p style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:24px; font-weight:700; color:#c5df3a">이번 사업의 범위</p>
+    <h3 style="font-family:'Noto Sans KR', Arial, sans-serif; font-size:36px; font-weight:700; line-height:1.3; color:#f3f3ee">걷는 AI + 실기체 시제품</h3>
+  </div>
+  <ol id="pf2c206cf9becc2_2-d2e6d276" style="position:absolute; top:522px; left:1259px; width:534px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; line-height:1.6; color:#d6d9dd">
+    <li>시뮬레이션에서 계단·험지 보행 모델 확보</li>
+    <li>ROS2에 모델 탑재</li>
+    <li>실기체 설계·제작과 핵심 부품 확보</li>
+  </ol>
+  <p id="32c04c8e" style="position:absolute; top:570px; left:168.6px; width:462.4px; font-family:'Noto Sans KR', Arial, sans-serif; font-size:28px; line-height:1.5; color:#4a4f57">안내견 양성에 수년 소요, 대기자가 공급을 넘어섬. 흰지팡이로는 단차·머리 높이 장애물 사전 파악 불가.</p>
+</section>
+
+<section class="slide" id="cad" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">03 · CAD</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15"><span style="color:#4F6800">CAD</span> 설계</h2>
+<p style="font-size:28px;color:#6A6F76">“ Fusion 360 기반, 관절 12개·체결 부품 단위까지 설계 ”</p>
+</div>
+<div style="display:flex;gap:56px;justify-content:center;align-items:end">
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+<img src="assets/iso-top-right.jpg" alt="Z-HOUND CAD 등각 뷰" style="width:365px;height:440px;object-fit:contain">
+<p style="font-size:24px;color:#7A7F86">등각</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+<img src="assets/front.jpg" alt="Z-HOUND CAD 정면 뷰" style="width:288px;height:440px;object-fit:contain">
+<p style="font-size:24px;color:#7A7F86">정면</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+<img src="assets/left.jpg" alt="Z-HOUND CAD 측면 뷰" style="width:463px;height:440px;object-fit:contain">
+<p style="font-size:24px;color:#7A7F86">측면</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:32px">
+<div style="display:flex;flex-direction:column;gap:6px;border-top:3px solid #A9C21E;padding:16px 0px 0px 0px">
+<h3 style="font-size:28px;font-weight:700">회전 관절 12개</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A4F57">롤 AK70-10 × 4, 피치·무릎 AK10-9 × 8</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:3px solid #A9C21E;padding:16px 0px 0px 0px">
+<h3 style="font-size:28px;font-weight:700">체결 부품까지 모델링</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A4F57">볼트 488개 구멍 일치, 부품 간섭 0건</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:3px solid #A9C21E;padding:16px 0px 0px 0px">
+<h3 style="font-size:28px;font-weight:700">출력용 분할 몸체</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A4F57">306 × 520 × 150 mm, 7조각 + 배터리·Jetson 자리</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:3px solid #A9C21E;padding:16px 0px 0px 0px">
+<h3 style="font-size:28px;font-weight:700">시뮬레이션으로 연결</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A4F57">Isaac Sim USD(링크 13·관절 12)로 변환</p>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">4</p>
+</section>
+
+<section class="slide" id="cad-fix" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">04 · CAD</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">CAD 단계에서 잡은 <span style="color:#4F6800">설계 결함</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 모터 제조사 2D 도면과 하나씩 대조 ”</p>
+</div>
+<table style="font-size:26px;color:#15171B">
+<tr><th style="width:26%;text-align:left">부위</th><th style="width:38%;text-align:left">문제</th><th style="width:36%;text-align:left">조치</th></tr>
+<tr><td>허벅지 클램프 (com_pro)</td><td>볼트 구멍이 30° 어긋나 체결 불가</td><td>볼트 패턴 30° 회전</td></tr>
+<tr><td>롤 모터 출력부 (combine_1)</td><td>볼트 머리가 모터 하우징에 닿음</td><td>Ø6 × 3.5 카운터보어로 매립</td></tr>
+<tr><td>combine_1 보스</td><td>볼트 구멍 옆 벽 두께 1 mm</td><td>보스 Ø50으로 확대</td></tr>
+<tr><td>엉덩이 피치 모터 고정</td><td>볼트 6개 중 3개만 사용</td><td>링 구조로 앞뒤 6개씩 양단 체결</td></tr>
+<tr><td>프로파일 소켓</td><td>15 mm만 삽입, 고정 볼트 없음</td><td>30 mm 삽입 + 교차 볼트 4개</td></tr>
+<tr><td>출력 부품 전체</td><td>FDM 공차 미반영</td><td>M3 Ø3.4, M4 Ø4.5 등 공차 반영</td></tr>
+</table>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 출력 전에 도면에서 안 맞는 곳을 먼저 잡아 재출력 횟수를 줄임.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">5</p>
+</section>
+
+<section class="slide" id="cad-body" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">05 · CAD</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">몸체·배선과 <span style="color:#4F6800">무게 배분</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 전장품을 다 넣고도 다리와 부딪히지 않게 ”</p>
+</div>
+<div style="display:flex;gap:64px;flex:1">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:26px;line-height:1.5;color:#3A3F47"><b>몸체</b> - 폭 400 → 306 mm로 줄여 웅크릴 때 정강이 간섭 제거. 7조각으로 나눠 출력, 상판은 탈착식.</p>
+<p style="font-size:26px;line-height:1.5;color:#3A3F47"><b>전원</b> - 6S 배터리 2개 직렬(12S, 44.4 V). 비상정지·메인 스위치·충전 포트는 뒷판에 배치.</p>
+<p style="font-size:26px;line-height:1.5;color:#3A3F47"><b>통신</b> - USB-CAN 2개로 앞·뒤 다리 버스 분리, 다리 안에서는 모터끼리 데이지체인.</p>
+<p style="font-size:26px;line-height:1.5;color:#3A3F47"><b>가동 범위</b> - 롤 ±45°, 피치 ±120°, 무릎 ±140° (모델 기준).</p>
+</div>
+<div style="width:700px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-size:28px;font-weight:700">CAD 질량 23.1 kg 구성</h3>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">모터 12개</p><div style="width:400px;height:28px;background:#A9C21E"></div><p style="font-size:24px;font-weight:700">9.60</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">배터리 2개</p><div style="width:170px;height:28px;background:#9A9E95"></div><p style="font-size:24px">4.07</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">몸체 출력물</p><div style="width:151px;height:28px;background:#9A9E95"></div><p style="font-size:24px">3.62</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">다리 출력물</p><div style="width:99px;height:28px;background:#9A9E95"></div><p style="font-size:24px">2.38</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">Jetson 목업</p><div style="width:54px;height:28px;background:#C9CCC3"></div><p style="font-size:24px">1.30</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">프로파일</p><div style="width:33px;height:28px;background:#9A9E95"></div><p style="font-size:24px">0.79</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">볼트·체결</p><div style="width:33px;height:28px;background:#9A9E95"></div><p style="font-size:24px">0.78</p></div>
+<div style="display:flex;align-items:center;gap:16px"><p style="width:190px;font-size:24px">커버·발</p><div style="width:22px;height:28px;background:#9A9E95"></div><p style="font-size:24px">0.53</p></div>
+<p style="font-size:24px;color:#7A7F86">단위 kg. Jetson 목업은 실제보다 무겁게 잡힌 값.</p>
+</div>
+</div>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 무게의 약 42%가 모터. 무릎 모터 토크 여유가 다음 과제.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">6</p>
+</section>
+
+<section class="slide" id="system" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">06 · 시뮬레이션</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">Z-HOUND <span style="color:#4F6800">제어 구조</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 깊이 영상 → 지형 인식 → 보행 모델 → 모터, 50 Hz 루프 ”</p>
+</div>
+<div style="display:flex;align-items:center;gap:0px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:16px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">깊이 카메라</h3>
+<p style="font-size:24px;color:#4A4F57">84 × 84 깊이 영상</p>
+</div>
+<x-connector style="width:56px;color:#7A7F86;border-width:3px"></x-connector>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:16px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">Depth ViT</h3>
+<p style="font-size:24px;color:#4A4F57">지형 높이 187점 복원</p>
+</div>
+<x-connector style="width:56px;color:#7A7F86;border-width:3px"></x-connector>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#15171B;color:#F3F3EE;border-radius:16px;padding:32px">
+<h3 style="font-size:32px;font-weight:700;color:#C5DF3A">보행 모델</h3>
+<p style="font-size:24px;color:#D6D9DD">강화학습 · IMU·관절 상태 입력</p>
+</div>
+<x-connector style="width:56px;color:#7A7F86;border-width:3px"></x-connector>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:16px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">STM32G474</h3>
+<p style="font-size:24px;color:#4A4F57">CAN으로 모터 명령</p>
+</div>
+<x-connector style="width:56px;color:#7A7F86;border-width:3px"></x-connector>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:16px;padding:32px">
+<h3 style="font-size:32px;font-weight:700">관절 모터 12개</h3>
+<p style="font-size:24px;color:#4A4F57">AK70-10 · AK10-9</p>
+</div>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:700;color:#4F6800">연산</p>
+<p style="font-size:28px;line-height:1.5;color:#3A3F47">Jetson Orin Nano Super, ROS2 기반 추론. 1회 추론 2.33 ms(CPU)로 50 Hz 제어 충족.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:700;color:#4F6800">안전장치</p>
+<p style="font-size:28px;line-height:1.5;color:#3A3F47">입력 100 ms 이상 끊김·이상 시 기본 자세 복귀. 소프트웨어 비상정지 포함.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:700;color:#4F6800">디지털 트윈</p>
+<p style="font-size:28px;line-height:1.5;color:#3A3F47">Fusion CAD → Isaac Sim USD 변환. 링크·관절·질량을 실기체 기준으로 반영.</p>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">7</p>
+</section>
+
+<section class="slide" id="ai-history" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">07 · 시뮬레이션</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">보행 AI <span style="color:#4F6800">개발 경과</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 버전마다 문제 하나씩 개선, V8 → V14 ”</p>
+</div>
+<table style="font-size:28px;color:#15171B">
+<tr><th style="width:12%;text-align:left">버전</th><th style="width:38%;text-align:left">개선한 문제</th><th style="width:50%;text-align:left">결과</th></tr>
+<tr><td>V8</td><td>대각 보행(트롯)</td><td>속도 명령 추종 확보</td></tr>
+<tr><td>V9</td><td>험지·계단 환경 추가</td><td>학습 환경 범위 확장</td></tr>
+<tr><td>V10</td><td>좌표계 오류</td><td>옆으로 걷던 원인 규명·수정</td></tr>
+<tr><td>V11</td><td>정답 지형을 보는 Teacher 모델</td><td>V12의 기준 모델</td></tr>
+<tr style="background:#E6EBCB"><td><b>V12</b></td><td><b>깊이 영상만으로 지형 파악</b></td><td><b>폐루프 9개 중 7개 통과, 계단 하강 3/3</b></td></tr>
+<tr><td>V13</td><td>모터 토크 제한(구동부 보호)</td><td>모터 한계 초과 요청 9.63% → 2.25%</td></tr>
+<tr><td>V14</td><td>다리끼리 부딪힘 보정</td><td>128개 병렬 환경 확대 훈련 완료</td></tr>
+</table>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 한 번에 하나씩 고치며 V14까지 개선. 전 버전 기록은 GitHub·클라우드에 보관.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">8</p>
+</section>
+
+<section class="slide" id="sim-results" style="background:#15171B;color:#F3F3EE;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#C5DF3A">08 · 시뮬레이션</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">시뮬레이션으로 본 <span style="color:#C5DF3A">보행 성능</span></h2>
+<p style="font-size:28px;color:#9AA0A6">“ 깊이 카메라 입력만으로 9개 시나리오 중 7개 통과 (V12) ”</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #C5DF3A;padding:24px 0px 0px 0px">
+<p style="font-size:96px;font-weight:800;line-height:1;color:#C5DF3A">7/9</p>
+<p style="font-size:28px;color:#D6D9DD">전체 시나리오 통과<br>(V12, 계단·험지 포함)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #C5DF3A;padding:24px 0px 0px 0px">
+<p style="font-size:96px;font-weight:800;line-height:1;color:#F3F3EE">3/3</p>
+<p style="font-size:28px;color:#D6D9DD">계단 하강 통과<br>(상승은 1/3)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #C5DF3A;padding:24px 0px 0px 0px">
+<p style="font-size:96px;font-weight:800;line-height:1;color:#F3F3EE">0.035</p>
+<p style="font-size:28px;color:#D6D9DD">지형 복원 오차(MAE)<br>검증 데이터 8,192개</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #C5DF3A;padding:24px 0px 0px 0px">
+<p style="font-size:96px;font-weight:800;line-height:1;color:#F3F3EE">2.33 ms</p>
+<p style="font-size:28px;color:#D6D9DD">1회 추론 시간(CPU)<br>50 Hz 제어 충족</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#22252B;border-radius:16px;padding:40px">
+<p style="font-size:24px;font-weight:700;color:#C5DF3A">V13 모터 토크 제한 효과 (평지, 전진 0.4 m/s 명령)</p>
+<p style="font-size:32px;line-height:1.5;color:#F3F3EE">요청 토크 P99 96.78 → 56.19 N·m · 평균 관절 전력 22.54 → 11.60 W · 전진 속도 0.72 → 0.68 m/s</p>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#9AA0A6;text-align:right">9</p>
+</section>
+
+<section class="slide" id="sim-video" style="background:#15171B;color:#F3F3EE;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#C5DF3A">09 · 시뮬레이션</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">시뮬레이션 <span style="color:#C5DF3A">보행 영상</span></h2>
+<p style="font-size:28px;color:#9AA0A6">“ 최신 모델(V14·V15) 기준, Isaac Sim ”</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<img src="assets/walk.jpg" data-video="assets/walk.mp4" alt="V15 평지 전진 0.4 m/s, ROS2와 Isaac Sim 연동 영상" style="width:398px;height:265px;object-fit:cover;border-radius:12px">
+<h3 style="font-size:28px;font-weight:700">평지 보행 (V15)</h3>
+<p style="font-size:24px;line-height:1.4;color:#BFC3C9">- ROS2 + Isaac Sim 연동<br>- 전진 명령 0.4 m/s</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<img src="assets/stairs_v14.jpg" data-video="assets/stairs_v14.mp4" alt="V14 오르막 계단 L5 보행 영상" style="width:398px;height:265px;object-fit:cover;border-radius:12px">
+<h3 style="font-size:28px;font-weight:700">계단 오르기 (V14)</h3>
+<p style="font-size:24px;line-height:1.4;color:#BFC3C9">- 오르막 L5, 명령 0.5 m/s<br>- 12초 생존·높이 상승 기준 충족</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<img src="assets/deep_crouch.jpg" data-video="assets/deep_crouch.mp4" alt="깊은 웅크리기 동작 영상" style="width:398px;height:265px;object-fit:cover;border-radius:12px">
+<h3 style="font-size:28px;font-weight:700">깊은 웅크리기</h3>
+<p style="font-size:24px;line-height:1.4;color:#BFC3C9">- 몸을 낮췄다 다시 일어서기</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<img src="assets/crouch_compare.jpg" data-video="assets/crouch_compare.mp4" alt="웅크리기 비교: 기존 10 cm 3초와 신규 18 cm 2초" style="width:398px;height:265px;object-fit:contain;background:#000000;border-radius:12px">
+<h3 style="font-size:28px;font-weight:700">웅크리기 비교</h3>
+<p style="font-size:24px;line-height:1.4;color:#BFC3C9">- 기존 10 cm / 3초<br>- 신규 18 cm / 2초</p>
+</div>
+</div>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 계단·평지·자세 전환까지 현재 모델로 시뮬레이션 확인 완료.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#9AA0A6;text-align:right">10</p>
+</section>
+
+<section class="slide" id="pcb" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">10 · PCB</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">다리별 <span style="color:#4F6800">전원·신호 분배 보드</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 다리당 보드 1개, 모터 3개에 전원·CAN 분배 ”</p>
+</div>
+<div style="display:flex;gap:48px;flex:1">
+<img src="assets/pcb_layout.png" alt="leg PDB V1.0 PCB 레이아웃: 왼쪽 XT90 입력과 XT30 출력 3개, 오른쪽 HAA·HFE·HKE CAN 커넥터 쌍" style="width:780px;height:552px;object-fit:contain;background:#15171B;border-radius:16px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:700">전원</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">XT90 입력 1개 → XT30 출력 3개로 엉덩이 롤·피치, 무릎 모터에 배터리 전원 분배.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:700">신호</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">관절(HAA·HFE·HKE)마다 2핀 커넥터 한 쌍으로 CAN 연결, 120 Ω 종단 저항 포함.</p>
+</div>
+<table style="font-size:24px;color:#15171B">
+<tr><th style="width:44%;text-align:left">부품</th><th style="width:36%;text-align:left">위치</th><th style="width:20%;text-align:right">수량</th></tr>
+<tr><td>XT90PW-M</td><td>CN1</td><td style="text-align:right">1</td></tr>
+<tr><td>XT30PW-F</td><td>U1–U3</td><td style="text-align:right">3</td></tr>
+<tr><td>Molex 22057025</td><td>CN2–CN6, CN9</td><td style="text-align:right">6</td></tr>
+<tr><td>120 Ω (0805)</td><td>R1–R3</td><td style="text-align:right">3</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">11</p>
+</section>
+
+<section class="slide" id="hardware" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">11 · 실기체</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">실기체 <span style="color:#4F6800">1차 조립</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 3D 프린팅 출력·1차 조립 완료, 무릎부 보강 진행 중 ”</p>
+</div>
+<div style="display:flex;gap:24px">
+<img src="assets/zhound_front.jpg" alt="Z-HOUND 1차 조립본 정면" style="flex:1;width:540px;height:405px;object-fit:cover;border-radius:16px">
+<img src="assets/zhound_frontleg.jpg" alt="Z-HOUND 앞다리와 모터" style="flex:1;width:540px;height:405px;object-fit:cover;border-radius:16px">
+<img src="assets/zhound_side.jpg" alt="Z-HOUND 측면" style="flex:1;width:540px;height:405px;object-fit:cover;border-radius:16px">
+</div>
+<div style="display:flex;gap:32px">
+<p style="flex:1;font-size:26px;line-height:1.5;color:#3A3F47"><b>설계</b> Fusion 360 상세 설계, 볼트 488개 구멍 일치·부품 간섭 0건 확인</p>
+<p style="flex:1;font-size:26px;line-height:1.5;color:#3A3F47"><b>몸체</b> 폭 400 → 306 mm로 줄여 웅크린 자세의 다리 간섭 제거</p>
+<p style="flex:1;font-size:26px;line-height:1.5;color:#3A3F47"><b>다음</b> 보강한 무릎 부품 재조립 10/28경, 이후 모터 구동 확인</p>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">12</p>
+</section>
+
+<section class="slide" id="redesign" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">12 · 실기체</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">무릎 결합부를 <span style="color:#4F6800">다시 설계한 이유</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ FEA 결과: 무릎 쪽 com_pro는 PLA 100% 채움에도 기준의 약 13배 변위 ”</p>
+</div>
+<p style="font-size:26px;color:#4A4F57">결합부 하나 때문에 발끝이 밀리는 양(mm, 상위 1% / 상위 0.1%). 기준은 결합부당 1 mm, <b>굵은 칸 = 기준 초과</b></p>
+<table style="font-size:26px;color:#15171B">
+<tr><th style="width:18%;text-align:left">결합부</th><th style="width:26%;text-align:left">부품</th><th style="width:20%;text-align:right">지금 출력 설정</th><th style="width:18%;text-align:right">PLA 100% 채움</th><th style="width:18%;text-align:right">같은 형상 알루미늄</th></tr>
+<tr><td>몸체 → hip</td><td>combine_1</td><td style="text-align:right"><b>3.0 / 6.6</b></td><td style="text-align:right">0.8 / <b>1.7</b></td><td style="text-align:right">0.03 / 0.07</td></tr>
+<tr><td>hip → 허벅지</td><td>fake_motor + fake_cover</td><td style="text-align:right"><b>5.2 / 11.0</b></td><td style="text-align:right"><b>1.4 / 3.0</b></td><td style="text-align:right">0.05 / 0.12</td></tr>
+<tr><td>hip → 허벅지</td><td>com_pro (엉덩이 쪽)</td><td style="text-align:right">0.5 / <b>1.1</b></td><td style="text-align:right">0.07 / 0.14</td><td style="text-align:right">≈ 0</td></tr>
+<tr style="background:#E6EBCB"><td><b>허벅지 → 정강이</b></td><td><b>com_pro (무릎 쪽)</b></td><td style="text-align:right"><b>29 / 52</b></td><td style="text-align:right"><b>7.5 / 13</b></td><td style="text-align:right">0.29 / 0.51</td></tr>
+<tr><td>허벅지 → 정강이</td><td>knee 컵</td><td style="text-align:right"><b>1.8 / 3.2</b></td><td style="text-align:right">0.21 / 0.38</td><td style="text-align:right">0.01 / 0.01</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.5;color:#4A4F57">계산: CAD 메시 0.75–1.25 mm 격자 FEA, 실제 접촉면(0.3 mm 이내)만 고정 · 하중 = 9개 시험에서 역산한 관절 반력, 4다리 대칭 · 물성 = Bambu PLA Basic 데이터시트(탄성계수 2.68 GPa, 층 방향 2.16 / 인장강도 39 MPa, 층 방향 35 / 열변형 54 °C) · 출력 설정 = 실제 출력 파일의 벽 2겹(약 0.9 mm), 인필 15% grid</p>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">13</p>
+</section>
+
+<section class="slide" id="handle" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">13 · 손잡이</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">손잡이(스마트 리드줄) <span style="color:#4F6800">동작 구조</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 잡는 힘으로 의도 전달, 모터 장력으로 방향 수신 ”</p>
+</div>
+<div style="display:flex;gap:56px;flex:1">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:1px solid #DCDDD5;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:30px;font-weight:700">찾기</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">로봇 위치를 쉽게 찾아 잡는 구조. 깊이 카메라로 사용자 손 인식·거리 측정.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:1px solid #DCDDD5;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:30px;font-weight:700">의도 읽기</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">압력 센서로 잡는 힘을 읽어 출발·정지 의도 파악. 손을 놓으면 비상정지.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#FBFBF8;border:1px solid #DCDDD5;border-radius:16px;padding:28px 32px">
+<h3 style="font-size:30px;font-weight:700">전달하기</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">QDD 모터 장력으로 방향·속도 전달. IMU로 리드줄 기울기 감지.</p>
+</div>
+</div>
+<div style="position:relative;width:780px;height:600px">
+<div style="position:absolute;left:140px;top:0px;width:500px;height:84px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center"><p style="font-size:26px;font-weight:700">대기 (저전력)</p></div>
+<div style="position:absolute;left:140px;top:140px;width:500px;height:84px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center"><p style="font-size:26px;font-weight:700">초기화 · IMU 기준값 보정</p></div>
+<div style="position:absolute;left:0px;top:300px;width:340px;height:110px;background:#FBFBF8;border:2px solid #9A9E95;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-size:28px;font-weight:700">찾기 모드</p><p style="font-size:24px;color:#4A4F57">손잡이 잡기 대기</p></div>
+<div style="position:absolute;left:440px;top:300px;width:340px;height:110px;background:#15171B;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-size:28px;font-weight:700;color:#C5DF3A">안내 모드</p><p style="font-size:24px;color:#D6D9DD">IMU 1 kHz · PID 500 Hz</p></div>
+<div style="position:absolute;left:140px;top:500px;width:500px;height:96px;background:#F6DEDA;border:2px solid #B3261E;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><p style="font-size:28px;font-weight:700;color:#8C1D18">비상정지</p><p style="font-size:24px;color:#8C1D18">모터 차단</p></div>
+<x-connector x1="390" y1="84" x2="390" y2="140" head="end" style="color:#7A7F86;border-width:3px"></x-connector>
+<x-connector x1="300" y1="224" x2="170" y2="300" head="end" style="color:#7A7F86;border-width:3px"></x-connector>
+<x-connector x1="340" y1="355" x2="440" y2="355" head="both" style="color:#7A7F86;border-width:3px"></x-connector>
+<x-connector x1="170" y1="410" x2="280" y2="500" head="end" style="color:#B3261E;border-width:3px"></x-connector>
+<x-connector x1="610" y1="410" x2="500" y2="500" head="end" style="color:#B3261E;border-width:3px"></x-connector>
+<p style="position:absolute;left:404px;top:94px;width:200px;font-size:24px;color:#4A4F57">움직임 감지</p>
+<p style="position:absolute;left:330px;top:256px;width:140px;font-size:24px;color:#4A4F57;text-align:center">잡음</p>
+<p style="position:absolute;left:330px;top:370px;width:140px;font-size:24px;color:#4A4F57;text-align:center">놓음</p>
+<p style="position:absolute;left:290px;top:440px;width:200px;font-size:24px;color:#8C1D18;text-align:center">압력 사라짐</p>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">14</p>
+</section>
+
+<section class="slide" id="handle-test" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">14 · 손잡이</p>
+<h2 style="font-size:60px;font-weight:700;line-height:1.15">손잡이 <span style="color:#4F6800">기능 시험</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 기울기 감지·압력 비상정지·손 인식 단위 시험 ”</p>
+</div>
+<div style="display:flex;gap:28px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<img src="assets/h_imu.jpg" alt="IMU 센서로 리드줄 기울기를 감지하는 시험 장면" style="width:536px;height:304px;object-fit:cover;border-radius:16px">
+<h3 style="font-size:30px;font-weight:700">IMU 기울기 감지</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">IMU로 리드줄이 기우는 방향을 읽어 모터에 반영</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<img src="assets/h_press.jpg" alt="압력 센서로 비상정지를 구현한 시험 장면" style="width:536px;height:304px;object-fit:cover;border-radius:16px">
+<h3 style="font-size:30px;font-weight:700">압력 센서 비상정지</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">손을 떼 압력이 사라지면 모터를 멈춤</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<img src="assets/h_hand.jpg" alt="깊이 카메라로 사용자의 손과 거리를 인식한 화면" style="width:536px;height:304px;object-fit:cover;border-radius:16px">
+<h3 style="font-size:30px;font-weight:700">손 인식</h3>
+<p style="font-size:26px;line-height:1.45;color:#4A4F57">손잡이를 놓친 사용자의 손 위치와 거리를 측정</p>
+</div>
+</div>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 다음은 진동 신호 보정과 로봇 본체 연동.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">15</p>
+</section>
+
+<section class="slide" id="build" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">15 · 제작·구매</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">외주 없는 <span style="color:#4F6800">자체 제작 과정</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 외주 없이 설계부터 학습까지 7단계 직접 수행 ”</p>
+</div>
+<table style="font-size:26px;color:#15171B">
+<tr><th style="width:16%;text-align:left">단계</th><th style="width:44%;text-align:left">한 일</th><th style="width:22%;text-align:left">도구·부품</th><th style="width:18%;text-align:left">상태</th></tr>
+<tr><td>1. 설계</td><td>12관절 구조, 모터 체결부, 몸체 재설계</td><td>Fusion 360</td><td>완료</td></tr>
+<tr><td>2. 부품 구매</td><td>연산 보드·SSD·배터리·전선·커넥터</td><td>17쪽 표 참고</td><td>완료</td></tr>
+<tr><td>3. 3D 프린팅</td><td>몸체·관절 브래킷·다리 커버</td><td>Bambu H2D·X1C</td><td>완료</td></tr>
+<tr><td>4. 조립·배선</td><td>모터·프레임 조립, 12S 전원·CAN 배선, 다리 분배 보드(11쪽)</td><td>2020 프로파일</td><td>1차 완료, 무릎 보강 중</td></tr>
+<tr><td>5. 보행 AI</td><td>강화학습 보행·깊이 인식 모델(V8~V14)</td><td>Isaac Sim/Lab</td><td>완료</td></tr>
+<tr><td>6. 로봇 SW</td><td>ROS2 런타임, 안전장치, A/B 테스트</td><td>ROS2</td><td>A/B 진행 중</td></tr>
+<tr><td>7. 핸들</td><td>스마트 리드줄 시제작·시험 (14~15쪽)</td><td>IMU·압력 센서·QDD 모터</td><td>시제품 시험 완료</td></tr>
+</table>
+<div style="display:flex"><p style="font-size:28px;font-weight:700;color:#15171B;background:#F6E27A;padding:6px 16px;border-radius:4px">⇒ 과업지시서: 해당 없음. 외주 없이 7단계 모두 팀 내부에서 수행.</p></div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">16</p>
+</section>
+
+<section class="slide" id="purchase" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">16 · 제작·구매</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">이번 사업 <span style="color:#4F6800">구매 내역</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 연산 보드·전원부 중심, 총 1,360,000원 ”</p>
+</div>
+<table style="font-size:26px;color:#15171B">
+<tr><th style="width:14%;text-align:left">결제일</th><th style="width:24%;text-align:left">구매처</th><th style="width:44%;text-align:left">품목</th><th style="width:18%;text-align:right">금액(원)</th></tr>
+<tr><td>10/12</td><td>(주)엘레파츠</td><td>XT30PW-F × 30, XT90PW-M × 10 (분배 보드·배선용)</td><td style="text-align:right">45,900</td></tr>
+<tr><td>10/11</td><td>구팡</td><td>Jetson Orin Nano Super 개발자 키트</td><td style="text-align:right">657,000</td></tr>
+<tr><td>10/11</td><td>나인웍스스토어</td><td>삼성 PM9C1 NVMe 256GB SSD</td><td style="text-align:right">90,900</td></tr>
+<tr><td>10/11</td><td>넥스트코리아</td><td>12·16AWG 실리콘케이블 빨강·검정 각 20 m</td><td style="text-align:right">96,200</td></tr>
+<tr><td>10/07</td><td>엑스캅터</td><td>ECOFLUX 16,000 mAh 6S 배터리 × 2</td><td style="text-align:right">470,000</td></tr>
+<tr style="background:#E6EBCB"><td><b>합계</b></td><td></td><td></td><td style="text-align:right"><b>1,360,000</b></td></tr>
+</table>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">17</p>
+</section>
+
+<section class="slide" id="status" style="background:#F3F3EE;color:#15171B;font-family:'Noto Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;color:#4F6800">17 · 현황</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15">현재 <span style="color:#4F6800">진행 현황</span></h2>
+<p style="font-size:28px;color:#6A6F76">“ 시뮬레이션·SW 완료, 실기체 검증 단계 ”</p>
+</div>
+<div style="display:flex;gap:32px;flex:1">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FBFBF8;border:1px solid #DCDDD5;border-radius:16px;padding:48px">
+<h3 style="font-size:36px;font-weight:700">구현 완료</h3>
+<ul style="font-size:28px;line-height:1.6;color:#3A3F47">
+<li>평지·험지·계단 시뮬레이션 보행</li>
+<li>깊이 영상 지형 인식(Depth ViT)</li>
+<li>모터 토크 제한, 다리 충돌 보정</li>
+<li>ROS2 런타임과 안전장치</li>
+<li>실기체 설계·출력·1차 조립</li>
+<li>사용자 핸들 시제품</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#15171B;color:#F3F3EE;border-radius:16px;padding:48px">
+<h3 style="font-size:36px;font-weight:700;color:#C5DF3A">향후 보완</h3>
+<ul style="font-size:28px;line-height:1.6;color:#D6D9DD">
+<li>무릎부 보강 부품 재조립</li>
+<li>모터 CAN 구동과 실물 보행 시험</li>
+<li>실제 깊이 카메라 보정</li>
+<li>계단 상승 성공률 개선(V12 1/3)</li>
+<li>ROS2 A/B 테스트로 V14 효과 확정</li>
+<li>핸들 진동 신호·비상정지 검증</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:100px;font-size:24px;color:#7A7F86;text-align:right">18</p>
+</section>
+</div>
+<div id="hint">F 또는 더블클릭: 발표 모드 · ←/→ 이동 · Esc 목록</div>
+<script>
+document.querySelectorAll('.slide div').forEach(function (d) {
+  var st = (d.getAttribute('style') || '').replace(/\s/g, '');
+  if (/display:flex/.test(st) && !/flex-direction:/.test(st)) d.style.flexDirection = 'row';
+});
+var NS = 'http://www.w3.org/2000/svg';
+function arrow(svg, x1, y1, x2, y2, color, w, head) {
+  var id = 'm' + Math.random().toString(36).slice(2);
+  var d = document.createElementNS(NS, 'defs'), mk = document.createElementNS(NS, 'marker');
+  mk.setAttribute('id', id); mk.setAttribute('viewBox', '0 0 10 10'); mk.setAttribute('refX', '9'); mk.setAttribute('refY', '5');
+  mk.setAttribute('markerWidth', '5'); mk.setAttribute('markerHeight', '5'); mk.setAttribute('orient', 'auto-start-reverse');
+  var p = document.createElementNS(NS, 'path'); p.setAttribute('d', 'M0 0L10 5L0 10z'); p.setAttribute('fill', color);
+  mk.appendChild(p); d.appendChild(mk); svg.appendChild(d);
+  var l = document.createElementNS(NS, 'line');
+  l.setAttribute('x1', x1); l.setAttribute('y1', y1); l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+  l.setAttribute('stroke', color); l.setAttribute('stroke-width', w);
+  if (head !== 'none') l.setAttribute('marker-end', 'url(#' + id + ')');
+  if (head === 'both') l.setAttribute('marker-start', 'url(#' + id + ')');
+  svg.appendChild(l);
+}
+document.querySelectorAll('x-connector').forEach(function (c) {
+  var color = c.style.color || '#7A7F86', w = parseFloat(c.style.borderWidth) || 2, head = c.getAttribute('head') || 'end';
+  var svg = document.createElementNS(NS, 'svg');
+  if (c.hasAttribute('x1')) {
+    svg.setAttribute('style', 'position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none');
+    arrow(svg, c.getAttribute('x1'), c.getAttribute('y1'), c.getAttribute('x2'), c.getAttribute('y2'), color, w, head);
+    c.parentElement.appendChild(svg); c.remove();
+  } else {
+    var W = parseFloat(c.style.width) || 56;
+    svg.setAttribute('width', W); svg.setAttribute('height', 20); svg.setAttribute('style', 'flex:none;overflow:visible');
+    arrow(svg, 4, 10, W - 4, 10, color, w, head); c.replaceWith(svg);
+  }
+});
+document.querySelectorAll('img[data-video]').forEach(function (img) {
+  var v = document.createElement('video');
+  v.src = img.getAttribute('data-video'); v.poster = img.getAttribute('src'); v.setAttribute('style', img.getAttribute('style'));
+  v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = true; v.title = img.alt;
+  img.replaceWith(v);
+});
+var frames = Array.prototype.map.call(document.querySelectorAll('.slide'), function (s) {
+  var f = document.createElement('div'); f.className = 'frame'; s.replaceWith(f); f.appendChild(s); return f;
+});
+var cur = 0;
+function layout() {
+  var pres = document.body.classList.contains('present');
+  var W = pres ? Math.min(innerWidth, innerHeight * 16 / 9) : Math.min(innerWidth - 32, 1280);
+  var sc = W / 1920;
+  frames.forEach(function (f) {
+    f.style.width = W + 'px'; f.style.height = (W * 9 / 16) + 'px';
+    f.firstChild.style.transform = 'scale(' + sc + ')';
+    f.style.margin = pres ? ((innerHeight - W * 9 / 16) / 2) + 'px auto 0' : '';
+  });
+}
+function show(i) { cur = Math.max(0, Math.min(frames.length - 1, i)); frames.forEach(function (f, k) { f.classList.toggle('on', k === cur); }); }
+function present(on) {
+  document.body.classList.toggle('present', on); show(cur); layout();
+  if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () {});
+}
+addEventListener('resize', layout);
+addEventListener('keydown', function (e) {
+  var pres = document.body.classList.contains('present');
+  if (e.key === 'f' || e.key === 'F') present(!pres);
+  else if (e.key === 'Escape') { present(false); frames[cur].scrollIntoView(); }
+  else if (pres && (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown')) show(cur + 1);
+  else if (pres && (e.key === 'ArrowLeft' || e.key === 'PageUp')) show(cur - 1);
+});
+frames.forEach(function (f, k) { f.addEventListener('dblclick', function () { cur = k; present(true); }); });
+layout();
+</script></body></html>
